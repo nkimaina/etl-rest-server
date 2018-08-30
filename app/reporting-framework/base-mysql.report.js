@@ -85,6 +85,12 @@ import * as breast_cancer_patient_list_template from './json-reports/breast-canc
 import * as cervical_cancer_monthly_screening_summary_aggregate from './json-reports/cervical-cancer-monthly-screening-summary-aggregate.json';
 import * as cervical_cancer_monthly_screening_summary_base from './json-reports/cervical-cancer-monthly-screening-summary-base.json';
 
+import * as patient_status_monthly_aggregate from './json-reports/patient-status-monthly-aggregate.json';
+import * as patient_status_monthly_base from './json-reports/patient-status-monthly-base.json';
+
+import * as patient_status_cohort_analysis_aggregate from './json-reports/patient-status-cohort-analysis-aggregate.json';
+import * as patient_status_cohort_analysis_base from './json-reports/patient-status-cohort-analysis-base.json';
+
 export class BaseMysqlReport {
     constructor(reportName, params) {
         this.reportName = reportName;
@@ -281,6 +287,18 @@ export class BaseMysqlReport {
                         patintChangeStatusTrackerDataSetbase: patint_change_status_tracker_base
                     });
                     break;
+                case 'patientStatusMonthlyAggregate':
+                    resolve({
+                        main: patient_status_monthly_aggregate,
+                        patientStatusMonthlyBase: patient_status_monthly_base
+                    });
+                    break;
+                case 'patientStatusCohortAnalysisAggregate':
+                    resolve({
+                        main: patient_status_cohort_analysis_aggregate,
+                        patientStatusCohortAnalysisBase: patient_status_cohort_analysis_base
+                    });
+                    break;
                 case 'everOnARTAggregate':
                     resolve({
                         main: ever_on_art_aggregate,
@@ -418,7 +436,7 @@ export class BaseMysqlReport {
     }
 
     executeReportQuery(sqlQuery) {
-        // console.log('Executing Query', sqlQuery);
+        console.log('Executing Query', sqlQuery);
         let runner = this.getSqlRunner();
         return new Promise((resolve, reject) => {
             runner.executeQuery(sqlQuery)

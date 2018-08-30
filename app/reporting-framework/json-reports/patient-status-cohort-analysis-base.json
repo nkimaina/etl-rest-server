@@ -1,0 +1,280 @@
+{
+    "name": "patientStatusCohortAnalysisBase",
+    "version": "1.0",
+    "tag": "",
+    "description": "",
+    "uses": [],
+    "sources": [
+        {
+            "table": "etl.hiv_monthly_report_dataset_v1_3",
+            "alias": "fhs"
+        },
+        {
+            "table": "etl.hiv_monthly_report_dataset_v1_3",
+            "alias": "fhs2",
+            "join": {
+                "type": "LEFT OUTER",
+                "joinCondition": "fhs.person_id = fhs2.person_id AND date_format(fhs2.endDate, '%m/%Y') = date_format('{endDate}', '%m/%Y')"
+            }
+        },
+        {
+            "table": "amrs.location",
+            "alias": "l",
+            "join": {
+                "type": "INNER",
+                "joinCondition": "l.location_id = fhs.location_id"
+            }
+        }
+    ],
+    "columns": [
+        {
+            "type": "derived_column",
+            "alias": "total_patients",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.person_id is not null then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "starting_month",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "date_format(fhs.endDate, '%m-01-%Y') "
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "ending_month",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "date_format(fhs2.endDate, '%m-%d-%Y')"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "reporting_month",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "date_format(fhs2.endDate, '%m/%Y') "
+            }
+        },
+        {
+            "type": "simple_column",
+            "alias": "location_uuid",
+            "column": "fhs.location_uuid"
+        },
+        {
+            "type": "simple_column",
+            "alias": "location_id",
+            "column": "fhs.location_id"
+        },
+        {
+            "type": "derived_column",
+            "alias": "active_starting",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='active' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "dead_starting",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='dead' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "LTFU_starting",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='ltfu' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "transfer_out_starting",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='transfer_out' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "active_ending",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs2.status='active' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "dead_ending",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs2.status='dead' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "LTFU_ending",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs2.status='ltfu' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "transfer_out_ending",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs2.status='transfer_out' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "active_to_active",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='active' and fhs2.status='active' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "active_to_LTFU",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='active' and fhs2.status='LTFU' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "active_to_dead",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='active' and fhs2.status='dead' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "active_to_transfer_out",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='active' and fhs2.status='transfer_out' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "dead_to_dead",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='dead' and fhs2.status='dead' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "dead_to_transfer_out",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='dead' and fhs2.status='transfer_out' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "dead_to_LTFU",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='dead' and fhs2.status='ltfu' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "dead_to_active",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='dead' and fhs2.status='active' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "LTFU_to_LTFU",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='ltfu' and fhs2.status='ltfu' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "LTFU_to_transfer_out",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='ltfu' and fhs2.status='transfer_out' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "LTFU_to_dead",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='ltfu' and fhs2.status='dead' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "LTFU_to_active",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='ltfu' and fhs2.status='active' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "transfer_out_to_transfer_out",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='transfer_out' and fhs2.status='transfer_out' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "transfer_out_to_LTFU",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='transfer_out' and fhs2.status='ltfu' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "transfer_out_to_dead",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='transfer_out' and fhs2.status='dead' then 1 else null end"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "transfer_out_to_active",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "case when fhs.status='transfer_out' and fhs2.status='active' then 1 else null end"
+            }
+        }
+    ],
+    "filters": {
+        "conditionJoinOperator": "and",
+        "conditions": [
+            {
+                "filterType": "tableColumns",
+                "conditionExpression": "date_format(fhs.endDate, '%m/%Y') = date_format(?, '%m/%Y')",
+                "parameterName": "startDate"
+            },
+            {
+                "filterType": "tableColumns",
+                "conditionExpression": "fhs.location_id in ?",
+                "parameterName": "locations"
+            }
+        ]
+    }
+}

@@ -1,0 +1,246 @@
+{
+    "name": "patientStatusMonthlyAggregate",
+    "version": "1.0",
+    "tag": "",
+    "description": "",
+    "uses": [
+        {
+            "name": "patientStatusMonthlyBase",
+            "version": "1.0",
+            "type": "dataset_def"
+        }
+    ],
+    "sources": [
+        {
+            "dataSet": "patientStatusMonthlyBase",
+            "alias": "hmsd"
+        }
+    ],
+    "columns": [
+        {
+            "type": "derived_column",
+            "alias": "total_patients",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.total_patients)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "active_return",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.active_return)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "active_return_to_active_return",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.active_return_to_active_return)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "active_return_to_LTFU",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.active_return_to_LTFU)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "active_return_to_dead",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.active_return_to_dead)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "active_return_to_transfer_out",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.active_return_to_transfer_out)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "LTFU",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.LTFU)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "LTFU_to_LTFU",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.LTFU_to_LTFU)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "LTFU_to_active_return",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.LTFU_to_active_return)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "LTFU_to_dead",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.LTFU_to_dead)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "LTFU_to_transfer_out",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.LTFU_to_transfer_out)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "deaths",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.deaths)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "dead_to_LTFU",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.dead_to_LTFU)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "dead_to_active_return",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.dead_to_active_return)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "dead_to_dead",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.dead_to_dead)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "dead_to_transfer_out",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.dead_to_transfer_out)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "transfer_out_patients",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.transfer_out_patients)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "transfer_out_to_transfer_out",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.transfer_out_to_transfer_out)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "transfer_out_to_active_return",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.transfer_out_to_active_return)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "transfer_out_to_LTFU",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.transfer_out_to_LTFU)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "transfer_out_to_dead",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.transfer_out_to_dead)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "none_to_active",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.none_to_active)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "none_to_other",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.none_to_other)"
+            }
+        },
+        {
+            "type": "simple_column",
+            "alias": "reporting_date",
+            "column": "hmsd.reporting_date"
+        },
+        {
+            "type": "simple_column",
+            "alias": "location_uuid",
+            "column": "hmsd.location_uuid"
+        },
+        {
+            "type": "simple_column",
+            "alias": "location_id",
+            "column": "hmsd.location_id"
+        },
+        {
+            "type": "simple_column",
+            "alias": "reporting_month",
+            "column": "hmsd.reporting_month"
+        }
+    ],
+    "groupBy": {
+        "groupParam": "groupByParam",
+        "columns": [
+            "reporting_date"
+        ],
+        "excludeParam": "excludeParam"
+    },
+    "dynamicJsonQueryGenerationDirectives": {
+        "patientListGenerator": {
+            "useTemplate": "patient-list-template",
+            "useTemplateVersion": "1.0",
+            "generatingDirectives": {
+                "joinDirectives": {
+                    "joinType": "INNER",
+                    "joinCondition": "<<base_column>> = <<template_column>>",
+                    "baseColumn": "person_id",
+                    "templateColumn": "person_id"
+                }
+            }
+        }
+    }
+}

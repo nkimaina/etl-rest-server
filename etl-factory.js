@@ -35,7 +35,6 @@ reportList.push.apply(reportList, require('./reports/labs-report.json'));
 reportList.push.apply(reportList, require('./reports/viral-load-monitoring-report.json'));
 reportList.push.apply(reportList, require('./reports/medical-history-report.json'));
 reportList.push.apply(reportList, require('./reports/clinic-lab-orders-report.json'));
-reportList.push.apply(reportList, require('./reports/patient-status-change-tracker-report.json'));
 reportList.push.apply(reportList, require('./reports/datasets/pep-dataset-report.json'));
 reportList.push.apply(reportList, require('./reports/patient-monthly-care-status.json'));
 reportList.push.apply(reportList, require('./reports/patient-daily-care-status.json'));

@@ -1,0 +1,260 @@
+{
+    "name": "patientStatusCohortAnalysisAggregate",
+    "version": "1.0",
+    "tag": "",
+    "description": "",
+    "uses": [
+        {
+            "name": "patientStatusCohortAnalysisBase",
+            "version": "1.0",
+            "type": "dataset_def"
+        }
+    ],
+    "sources": [
+        {
+            "dataSet": "patientStatusCohortAnalysisBase",
+            "alias": "hmsd"
+        }
+    ],
+    "columns": [
+        {
+            "type": "derived_column",
+            "alias": "total_patients",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.total_patients)"
+            }
+        },
+        {
+            "type": "simple_column",
+            "alias": "location_uuid",
+            "column": "hmsd.location_uuid"
+        },
+        {
+            "type": "simple_column",
+            "alias": "location_id",
+            "column": "hmsd.location_id"
+        },
+        {
+            "type": "simple_column",
+            "alias": "starting_month",
+            "column": "hmsd.starting_month"
+        },
+        {
+            "type": "simple_column",
+            "alias": "reporting_month",
+            "column": "hmsd.reporting_month"
+        },
+        {
+            "type": "simple_column",
+            "alias": "ending_month",
+            "column": "hmsd.ending_month"
+        },
+        {
+            "type": "derived_column",
+            "alias": "active_starting",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.active_starting)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "LTFU_starting",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.LTFU_starting)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "dead_starting",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.dead_starting)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "transfer_out_starting",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.transfer_out_starting)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "active_ending",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.active_ending)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "LTFU_ending",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.LTFU_ending)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "dead_ending",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.dead_ending)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "transfer_out_ending",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.transfer_out_ending)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "active_to_active",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.active_to_active)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "active_to_LTFU",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.active_to_LTFU)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "active_to_dead",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.active_to_dead)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "active_to_transfer_out",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.active_to_transfer_out)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "dead_to_dead",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.dead_to_dead)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "dead_to_transfer_out",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.dead_to_transfer_out)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "dead_to_LTFU",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.dead_to_LTFU)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "dead_to_active",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.dead_to_active)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "LTFU_to_LTFU",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.LTFU_to_LTFU)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "LTFU_to_transfer_out",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.LTFU_to_transfer_out)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "LTFU_to_dead",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression":  "count(hmsd.LTFU_to_dead)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "LTFU_to_active",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression":  "count(hmsd.LTFU_to_dead)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "transfer_out_to_transfer_out",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.transfer_out_to_transfer_out)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "transfer_out_to_LTFU",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "count(hmsd.transfer_out_to_LTFU)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "transfer_out_to_dead",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression":  "count(hmsd.transfer_out_to_dead)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "transfer_out_to_active",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression":  "count(hmsd.transfer_out_to_active)"
+            }
+        }
+    ],
+    "dynamicJsonQueryGenerationDirectives": {
+        "patientListGenerator": {
+            "useTemplate": "patient-list-template",
+            "useTemplateVersion": "1.0",
+            "generatingDirectives": {
+                "joinDirectives": {
+                    "joinType": "INNER",
+                    "joinCondition": "<<base_column>> = <<template_column>>",
+                    "baseColumn": "person_id",
+                    "templateColumn": "person_id"
+                }
+            }
+        }
+    }
+}

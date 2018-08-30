@@ -32,9 +32,6 @@ import {
     MonthlyScheduleService
 } from './service/monthly-schedule-service';
 import {
-    PatientStatusChangeTrackerService
-} from './service/patient-status-change-tracker-service';
-import {
     clinicalArtOverviewService
 } from './service/clinical-art-overview.service';
 import { labOrdersService } from './service/lab-orders.service';
@@ -83,6 +80,19 @@ import {
 import {
     Moh731Report
 } from './app/reporting-framework/hiv/moh-731.report';
+
+import {
+    PatientStatusCummulativeReport
+} from './app/reporting-framework/hiv/patient-status-cummulative.report';
+
+import {
+    PatientStatusMonthlyReport
+} from './app/reporting-framework/hiv/patient-status-monthly.report';
+
+import {
+    PatientStatusCohortAnalysisReport
+} from './app/reporting-framework/hiv/patient-status-cohort-analysis.report';
+
 import {
     BreastCancerMonthlySummaryService
 } from './service/breast-cancer-monthly-summary.service';
@@ -2189,12 +2199,41 @@ module.exports = function () {
                                     let requestParams = Object.assign({}, request.query, request.params);
                                     let reportParams = etlHelpers.getReportParams(request.query.reportName, ['startDate', 'endDate', 'locationUuids', 'locations', 'analysis'], requestParams);
 
-                                    let service = new PatientStatusChangeTrackerService();
-                                    service.getAggregateReport(reportParams).then((result) => {
-                                        reply(result);
-                                    }).catch((error) => {
-                                        reply(error);
-                                    });
+                                    switch (reportParams.requestParams.analysis || 'none') {
+                                        case 'cumulativeAnalysis':
+                                            let cmReport = new PatientStatusCummulativeReport(reportParams);
+                                            cmReport.generateReport()
+                                                .then((results) => {
+                                                    reply(results);
+                                                })
+                                                .catch((error) => {
+                                                    reply(Boom.internal('An error occured', error));
+                                                });
+                                            break;
+                                        case 'monthlyAnalysis':
+                                            let psmReport = new PatientStatusMonthlyReport(reportParams);
+                                            psmReport.generateReport()
+                                                .then((results) => {
+                                                    reply(results);
+                                                })
+                                                .catch((error) => {
+                                                    reply(Boom.internal('An error occured', error));
+                                                });
+                                            break;
+                                        case 'cohortAnalysis':
+                                            let pscaReport = new PatientStatusCohortAnalysisReport(reportParams);
+                                            pscaReport.generateReport()
+                                                .then((results) => {
+                                                    reply(results);
+                                                })
+                                                .catch((error) => {
+                                                    reply(Boom.internal('An error occured', error));
+                                                });
+                                            break;
+                                        default:
+                                            Boom.notFound('Resource not found');
+                                    }
+
                                 });
                         }
                     },
@@ -2235,12 +2274,45 @@ module.exports = function () {
                             preRequest.resolveLocationIdsToLocationUuids(request,
                                 function () {
                                     let requestParams = Object.assign({}, request.query, request.params);
-                                    let service = new PatientStatusChangeTrackerService();
-                                    service.getPatientListReport(requestParams).then((result) => {
-                                        reply(result);
-                                    }).catch((error) => {
-                                        reply(error);
-                                    });
+
+                                    let indicators = requestParams.indicator.split(',');
+                                    let locations = requestParams.locations.split(',');
+                                    requestParams.locations = locations;
+
+                                    switch (requestParams.analysis || 'none') {
+                                        case 'cumulativeAnalysis':
+
+                                            let cmReport = new PatientStatusCummulativeReport(requestParams);
+                                            cmReport.generatePatientListReport(indicators)
+                                                .then((results) => {
+                                                    reply(results);
+                                                })
+                                                .catch((error) => {
+                                                    reply(Boom.internal('An error occured', error));
+                                                });
+                                            break;
+                                        case 'monthlyAnalysis':
+                                            let mcReport = new PatientStatusMonthlyReport(requestParams);
+                                            mcReport.generatePatientListReport(indicators)
+                                                .then((results) => {
+                                                    reply(results);
+                                                })
+                                                .catch((error) => {
+                                                    reply(Boom.internal('An error occured', error));
+                                                });
+                                            break;
+                                        case 'cohortAnalysis':
+                                            let pscaReport = new PatientStatusCohortAnalysisReport(requestParams);
+                                            pscaReport.generatePatientListReport(indicators)
+                                            .then((results) => {
+                                                reply(results);
+                                            })
+                                            .catch((error) => {
+                                                reply(Boom.internal('An error occured', error));
+                                            });
+                                        default:
+                                            Boom.notFound('Resource not found');
+                                    }
                                 });
                         }
                     },

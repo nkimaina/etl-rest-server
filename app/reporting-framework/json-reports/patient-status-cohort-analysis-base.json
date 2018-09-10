@@ -6,11 +6,11 @@
     "uses": [],
     "sources": [
         {
-            "table": "etl.hiv_monthly_report_dataset_v1_3",
+            "table": "etl.hiv_monthly_report_dataset_v1_2",
             "alias": "fhs"
         },
         {
-            "table": "etl.hiv_monthly_report_dataset_v1_3",
+            "table": "etl.hiv_monthly_report_dataset_v1_2",
             "alias": "fhs2",
             "join": {
                 "type": "LEFT OUTER",

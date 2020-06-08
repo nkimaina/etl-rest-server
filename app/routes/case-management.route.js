@@ -29,7 +29,8 @@ const routes = [
                     caseManagerUserId: request.query.caseManagerUserId,
                     isNewlyEnrolled: request.query.isNewlyEnrolled,
                     startIndex: request.query.startIndex,
-                    limit: request.query.limit
+                    limit: request.query.limit,
+                    hasNoEncounterToday: request.query.hasNoEncounterToday
                 }
                 caseManagementData.getCaseManagementData(params,
                     (result) => {

@@ -60,6 +60,10 @@ const caseDataDao = {
             if (params.caseManagerUserId != null) {
                 where = where + "and case_manager_user_id in (" + params.caseManagerUserId + ")"
             }
+            if (params.hasNoEncounterToday == 1) {
+                where = where + "and date(t1.encounter_datetime) <> date(now())"
+            }
+
             sql = "select " + columns + "FROM etl.flat_case_manager `t1` LEFT JOIN amrs.relationship `t2` on (t1.person_id = t2.person_a) " +
                 "LEFT JOIN amrs.person_attribute `t3` on (t1.person_id = t3.person_id AND t3.person_attribute_type_id = 68 AND t1.case_manager_user_id = t3.value)  " +
                 "LEFT JOIN amrs.encounter_type t5 ON (t1.encounter_type = t5.encounter_type_id) "+

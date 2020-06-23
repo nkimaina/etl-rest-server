@@ -211,6 +211,10 @@
           {
             "uuid": "afabceae-61d4-42b6-8f6a-fff48a7797ea",
             "display": "COVIDCASEREPORTING"
+          },
+          {
+            "uuid": "824ca90d-c313-4d7e-bc99-119871d927cb",
+            "display": "OVCNONENROLLMENT"
           }
         ]
       },
@@ -245,6 +249,10 @@
           {
             "uuid": "afabceae-61d4-42b6-8f6a-fff48a7797ea",
             "display": "COVIDCASEREPORTING"
+          },
+          {
+            "uuid": "824ca90d-c313-4d7e-bc99-119871d927cb",
+            "display": "OVCNONENROLLMENT"
           }
         ]
       },
@@ -284,6 +292,10 @@
           {
             "uuid": "afabceae-61d4-42b6-8f6a-fff48a7797ea",
             "display": "COVIDCASEREPORTING"
+          },
+          {
+            "uuid": "824ca90d-c313-4d7e-bc99-119871d927cb",
+            "display": "OVCNONENROLLMENT"
           }
         ]
       },
@@ -1455,6 +1467,10 @@
           {
             "uuid": "afabceae-61d4-42b6-8f6a-fff48a7797ea",
             "display": "COVIDCASEREPORTING"
+          },
+          {
+            "uuid": "824ca90d-c313-4d7e-bc99-119871d927cb",
+            "display": "OVCNONENROLLMENT"
           }
         ]
       }
@@ -3681,6 +3697,10 @@
         {
           "uuid": "afabceae-61d4-42b6-8f6a-fff48a7797ea",
           "display": "COVIDCASEREPORTING"
+        },
+        {
+          "uuid": "824ca90d-c313-4d7e-bc99-119871d927cb",
+          "display": "OVCNONENROLLMENT"
         }]
       },
       {
